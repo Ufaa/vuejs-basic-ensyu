@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>リアルタイム検索</title>
+</head>
+
+<style>
+ input {
+    border: 2px solid;
+    border-color: rgb(1, 209, 1);
+    border-radius: 5%;
+}
+</style>
+
+<body>
+<div id="app">
+    <input type="text" v-model="keyword">
+    <table>
+        <tr v-for="user in filteredUsers" :key="user.name">
+            <td v-text="user.name"></td>
+        </tr>
+    </table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+<script>
+
+    new Vue({
+        el: '#app',
+        data: {
+            keyword: '',
+            users: [
+                {
+                    name: '佐藤',
+                },
+                {
+                    name: '山田',
+                },
+                {
+                    name: '鈴木',
+                },
+                {
+                    name: '田中',
+                },
+            ]
+        },
+        computed: {
+            filteredUsers: function() {
+
+                var users = [];
+
+                for(var i in this.users) {
+
+                    var user = this.users[i];
+
+                    if(user.name.indexOf(this.keyword) !== -1 ) 
+                    {
+                        users.push(user);
+                    }
+
+                }
+
+                return users;
+
+            }
+        }
+    });
+
+</script>
+</body>
+</html>
